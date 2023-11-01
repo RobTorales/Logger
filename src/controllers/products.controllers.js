@@ -1,4 +1,6 @@
 import ProductService from "../services/product.services.js";
+import CustomeError from "../services/errors/customeError.js";
+import { productError } from "../services/errors/errorMessages/product.error.js";
 
 class ProductController {
     constructor() {
@@ -10,26 +12,55 @@ class ProductController {
             const products = await this.productService.getProducts(req.query);
             res.send(products);
         } catch (error) {
-            this.handleError(res, "Error al obtener productos", error);
+            const productErr = new CustomeError({
+                name: "Product Fetch Error",
+                message: "Error al obtener los productos",
+                code:500,
+                cause:error.message,
+              });
+              req.logger.error(productErr);
+              res.status(500).send({status:"error", message:"Error al obtener los productos"})
         }
     }
 
-    async getProductById(req, res) {
+    async getProductById(req, res, next) {
         try {
             const pid = req.params.pid;
+            req.logger.info("Product ID:", pid);
+            if(!mongoose.Types.ObjectId.isValid(pid)){
+                throw new CustomeError({
+                name: "Invalid ID",
+                message: "El ID no es correcto",
+                code:400,
+                cause: productError(pid),
+                });
+            }
             const product = await this.productService.getProductbyId(pid);
             if (!product) {
-                return res.status(404).send({ status: "error", message: "Producto no encontrado" });
+                throw new CustomeError({
+                    name: "Product not found",
+                    message: "El producto no pudo ser encontrado",
+                    code:404,
+                  });
             }
             res.json(product);
         } catch (error) {
-            this.handleError(res, "Error al encontrar producto por su ID", error);
+            next(error)
         }
     }
 
     async addProduct(req, res) {
-        const { title, description, code, price, stock, category, thumbnail } = req.body;
-        if (!this.validateRequiredFields(req.body, ["title", "description", "code", "price", "stock", "category", "thumbnail"])) {
+        const { 
+            title, 
+            description, 
+            code, 
+            price, 
+            stock, 
+            category, 
+            thumbnails 
+        } = req.body;
+        req.logger.info("Received thumbnail:", thumbnail);
+        if (!this.validateRequiredFields(req.body, ["title", "description", "code", "price", "stock", "category", "thumbnails"])) {
             return res.status(400).send({ status: "error", message: "Faltan campos requeridos" });
         }
         try {
@@ -40,7 +71,7 @@ class ProductController {
                 price,
                 stock,
                 category,
-                thumbnail,
+                thumbnails,
             });
             if (add && add._id) {
                 console.log("Producto añadido correctamente:",add);
@@ -56,14 +87,23 @@ class ProductController {
                 price,
                 stock,
                 category,
-                thumbnail,
+                thumbnails,
                 });
                 return;
             } else {
-                this.handleError(res, "No se pudo agregar el producto");
+                req.logger.error("Error al añadir producto, wasAdded:", add);
+                res.status(500).send({
+                    status: "error",
+                    message: "Error! No se pudo agregar el Producto!",
+                  });
+                  return;
             }
         } catch (error) {
-            this.handleError(res, "Error al agregar producto", error);
+            req.logger.error("Error en addProduct:", error, "Stack:", error.stack);
+            res
+                .status(500)
+                .send({ status: "error", message: "Internal server error." });
+            return;
         }
     }
 
@@ -77,7 +117,7 @@ class ProductController {
                 status,
                 stock,
                 category,
-                thumbnail,
+                thumbnails,
               } = req.body;
               const pid = req.params.pid;
         
@@ -89,7 +129,7 @@ class ProductController {
                 status,
                 stock,
                 category,
-                thumbnail,
+                thumbnails,
               });
         
               if (wasUpdated) {
@@ -115,7 +155,7 @@ class ProductController {
             const pid = req.params.pid;
 
             if (!mongoose.Types.ObjectId.isValid(pid)) {
-                console.log("ID del producto no válido");
+                req.logger.error("ID del producto no válido");
                 res.status(400).send({
                 status: "error",
                 message: "ID del producto no válido",
@@ -151,7 +191,11 @@ class ProductController {
                 });
             }
         } catch (error) {
-            this.handleError(res, "Error Interno", error);
+            console.error(error);
+            res.status(500).send({
+                status: "error",
+                message: "Error interno del servidor",
+            });
         }
     }
 }

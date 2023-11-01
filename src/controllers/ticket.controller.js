@@ -1,4 +1,4 @@
-import TicketServices from "../services/ticketServices.js";
+import TicketServices from "../services/ticket.services.js";
 
 class TicketController {
   constructor() {
@@ -19,7 +19,7 @@ class TicketController {
             throw new Error("Error al crear el ticket");
         }
     } catch (error) {
-        console.error('Error específico en la creación del ticket:', error);
+        req.logger.error('Error específico en la creación del ticket:', error);
         throw error;  
     }
 }

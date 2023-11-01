@@ -11,6 +11,10 @@ import ChatManager from "./dao/ChatManager.js";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 import sessionsRouter from "./routes/sessions.router.js";
+import emailRouter from "./src/routes/email.routes.js";
+import smsRouter from "./src/routes/sms.router.js";
+import mockingRouter from "./src/moking/mock.router.js";
+import logsRouter from "./src/routes/logs.routes.js";
 import viewsRouter from "./routes/views.router.js";
 import session from "express-session";
 import { MONGODB_CNX_STR, PORT, SECRET_SESSIONS } from "./config/config.js";
@@ -19,6 +23,8 @@ import initializeGitHubPassport from "./github/ingreso.github.js";
 import passport from "passport";
 import cors from "cors";
 import initializePassport from "./config/passport.config.js";
+import "./src/dao/dbConfig.js"
+import { addLogger, devLogger } from "./src/config/logger.js";
 
 const app = express();
 const puerto = 8080;
@@ -26,6 +32,8 @@ app.use(cookieParser());
 initializePassport();
 initializeGitHubPassport();
 app.use(passport.initialize());
+app.use(addLogger);
+app.use(morgan('dev'))
 
 
 const httpServer = app.listen(PORT, () => {console.log(`conectado a ${PORT}`)})
@@ -58,7 +66,11 @@ app.use(express.static(__dirname + "/public"));
 app.use("/api/products/", productsRouter);
 app.use("/api/carts/", cartsRouter);
 app.use("/api/sessions/", sessionsRouter);
+app.use('/mockingproducts', mockingRouter);
+app.use("/api/email", emailRouter);
+app.use("/api/sms", smsRouter);
 app.use("/", viewsRouter);
+app.use('/loggerTest', logsRouter)
 
 mongoose.connect("mongodb+srv://roberto1608torales:roberto1608@cluster0.ggriuqe.mongodb.net/ecommerce?retryWrites=true&w=majority");
 

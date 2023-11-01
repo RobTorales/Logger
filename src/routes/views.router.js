@@ -23,10 +23,18 @@ router.get("/products/:pid", async (req, res) => {
     res.render("product", {product});
 });
 
-router.get("/cart", async (req, res) => {
+router.get("/cart/:cid", async (req, res) => {
     const cid = req.params.cid;
-    const cart = await PM.getCart(cid);
-    res.render("products", {products});
+    const cart = await CM.getCart(cid);
+    if (cart) {
+        console.log(JSON.stringify(cart, null, 4));
+        res.render("cart", { products: cart.products });
+      } else {
+        res.status(400).send({
+          status: "error",
+          message: "Error! No se encuentra el ID de Carrito!",
+        });
+      }
 });
 
 router.get("/realtimeproducts", (req, res) => {

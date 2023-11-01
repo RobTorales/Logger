@@ -1,5 +1,8 @@
 import { cartModel } from "../dao/models/cart.model.js";
 import CartServices from "../services/cart.services.js";
+import TicketController from "./ticket.controller.js";
+import UserDTO from "../dao/dtos/user.dto.js";
+import { ticketModel } from "../dao/models/ticket.model.js";
 
 
 class CartController {
@@ -88,6 +91,7 @@ class CartController {
     }
 
     createPurchaseTicket = async (req, res) => {
+        req.logger.info("Ruta /carts/:cid/purchase accedida");
         try {
             if (!req.user || !req.user.id) {
                 throw new Error("Usuario no definido");
@@ -98,7 +102,9 @@ class CartController {
             if (!cart) {
                 throw new Error("Carrito no encontrado");
             }
-    
+            
+            req.logger.info("Productos en el carrito:", cart.products);
+
             const ProductManager = new ProductManager();
             const TicketController = new TicketController();
             const FailedProducts = [];
@@ -165,6 +171,83 @@ class CartController {
           .json({ status: "error", message: "Compra no encontrada" });
       }
     }
+    async ticketEnd(req, res) {
+        try {
+          const { cid } = req.params;
+          const infoUser = new UserDTO(req.session);
+          const infoUserEmail = req.session.email;
+          const cartFound = await this.cartService.getCart(cid);
+          if (!cartFound) {
+            throw new Error('Cart not found');
+          }
+    
+          const idCart = cartFound._id;
+    
+          let cartConStock = [];
+          let cartSinStock = [];
+    
+
+          cartFound.products.forEach((item) => {
+            const idProduct = item._id._id.toString();
+            const title = item._id.title;
+            const quantityInCart = parseInt(item.quantity);
+            const availableStock = parseInt(item._id.stock);
+            const productPrice = parseInt(item._id.price);
+    
+            if (quantityInCart <= availableStock) {
+              const precioTotalProducto = productPrice * quantityInCart;
+              cartConStock.push({ idProduct, quantity: quantityInCart, precioTotalProducto, title });
+              const product = this.productClass.getProductById(idProduct);
+              let quantityTotal = availableStock - quantityInCart;
+              productClass.updateOne(
+                idProduct,
+                product.title,
+                product.description,
+                product.price,
+                product.thumbnails,
+                product.code,
+                quantityTotal,
+                product.category,
+                product.status
+              );
+            } else {
+              cartSinStock.push({ idProduct, quantity: quantityInCart });
+            }
+          });
+    
+          let precioTotal = 0;
+          cartConStock.forEach((producto) => {
+            precioTotal += producto.precioTotalProducto * producto.quantity;
+          });
+    
+          let cart = cartConStock.map((item) => {
+            return {
+              id: item.idProduct,
+              quantity: item.quantity,
+              price: item.precioTotalProducto,
+              title: item.title,
+            };
+          });
+    
+          const ticketData = {
+            code: '',
+            purchase_datetime: new Date(),
+            amount: precioTotal,
+            purchaser: infoUserEmail,
+            products: cart,
+          };
+    
+          let ticket = await ticketModel.create(ticketData);
+          let code = ticket._id.toString();
+          await ticketModel.findByIdAndUpdate(ticket._id, { code: code });
+          await this.cartService.deleteProducts(idCart);
+          const idTicket = ticket._id;
+          return res.status(200).render('ticketFinal', { idTicket, cart: cart, idCart, infoUser, precioTotal });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    
 }
 
 export default CartController;

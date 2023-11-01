@@ -1,6 +1,6 @@
 import { generateMockProduct } from "./utils.mocking.js";
 
-const generateMockProducts = async (req, res) => {
+const getMockProducts = async (req, res) => {
     try {
         const products = [];
         for (let i = 0; i < 101; i++) {
@@ -13,4 +13,4 @@ const generateMockProducts = async (req, res) => {
     }
 };
 
-export default generateMockProducts;
+export default getMockProducts;

@@ -1,6 +1,24 @@
 import dotenv from "dotenv";
+import { Command } from "commander";
 
-dotenv.config();
+const program = new Command();
+
+program 
+       .option('-d', 'Variable for debug', false)
+       .option('-p <port>', 'Server port', 9090)
+       .option('--mode <mode>', 'Option mode', 'development')
+program.parse();
+
+console.log("Mode Option: ", program.opts().mode);
+
+const environment = program.opts().mode;
+
+dotenv.config({
+       path:
+         environment === "production"
+           ? "./src/config/.env.production"
+           : "./src/config/.env.development",
+     });
 
 export const PORT = 8080;
 export const MONGODB_CNX_STR = process.env.MONGODB_CNX_STR;

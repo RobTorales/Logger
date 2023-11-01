@@ -1,5 +1,7 @@
 import AuthServices from "../services/auth.services.js";
 import CartServices from "../services/cart.services.js";
+import { authError } from "../services/errors/errorMessages/user.auth.error.js";
+import CustomeError from "../services/error/customeError.js";
 
 class AuthController {
     constructor (){

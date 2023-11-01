@@ -59,7 +59,7 @@ export const sendEmail = (req, res) => {
       res.send({ message: "Success!", payload: info });
     });
   } catch (error) {
-    console.error(error);
+    req.logger.error(error);
     res
       .status(500)
       .send({
@@ -75,15 +75,15 @@ export const sendEmailWithAttachments = (req, res) => {
       mailOptionsWithAttachments,
       (error, info) => {
         if (error) {
-          console.log(error);
+          req.logger.error(error);
           res.status(400).send({ message: "Error", payload: error });
         }
-        console.log("Message sent: %s", info.messageId);
+        req.logger.info("Message sent: %s", info.messageId);
         res.send({ message: "Success!", payload: info });
       }
     );
   } catch (error) {
-    console.error(error);
+    req.logger.error(error);
     res
       .status(500)
       .send({
