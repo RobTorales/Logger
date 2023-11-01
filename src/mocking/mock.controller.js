@@ -1,16 +1,15 @@
 import { generateMockProduct } from "./utils.mocking.js";
 
-const getMockProducts = async (req, res) => {
+
+export const getMockProducts = async (req, res) => {
     try {
-        const products = [];
+        let products = [];
         for (let i = 0; i < 101; i++) {
             products.push(generateMockProduct());
         }
-        res.json(products); 
+        res.send({status: "success", payload: products});
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Could not get the products", message: error.message });
+        res.status(500).send({error:  error, message: "Could not get the products:"});
     }
 };
-
-export default getMockProducts;

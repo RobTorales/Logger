@@ -11,10 +11,10 @@ import ChatManager from "./dao/ChatManager.js";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 import sessionsRouter from "./routes/sessions.router.js";
-import emailRouter from "./src/routes/email.routes.js";
-import smsRouter from "./src/routes/sms.router.js";
-import mockingRouter from "./src/moking/mock.router.js";
-import logsRouter from "./src/routes/logs.routes.js";
+import emailRouter from "./routes/email.router.js";
+import smsRouter from "./routes/sms.router.js";
+import mockingRouter from "./mocking/mock.router.js";
+import logsRouter from "./routes/logs.router.js";
 import viewsRouter from "./routes/views.router.js";
 import session from "express-session";
 import { MONGODB_CNX_STR, PORT, SECRET_SESSIONS } from "./config/config.js";
@@ -23,8 +23,8 @@ import initializeGitHubPassport from "./github/ingreso.github.js";
 import passport from "passport";
 import cors from "cors";
 import initializePassport from "./config/passport.config.js";
-import "./src/dao/dbConfig.js"
-import { addLogger, devLogger } from "./src/config/logger.js";
+import "./dao/dbConfig.js";
+import { addLogger, devLogger } from "./config/logger.js";
 
 const app = express();
 const puerto = 8080;

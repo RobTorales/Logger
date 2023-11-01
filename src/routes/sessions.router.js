@@ -13,7 +13,7 @@ const authController = new AuthController();
 
 
 router.post("/login", (req, res) => authController.loginUser(req, res));
-router.post("/register", userController.Register);
+router.post("/register", userController.register);
 router.get("/restore", userController.restorePassword);
 router.get(
   "/github",
@@ -24,13 +24,13 @@ router.get(
   "/githubcallback",
   passport.authenticate("github", { failureRedirect: "/login" }),
   (req, res) => {
-    console.log("GitHub Callback Route");
+    req.logger.info("GitHub Callback Route");
     authController.githubCallback(req, res);
   }
 );
 router.post("/logout", (req, res) => authController.logout(req, res));
 router.get("/current", passportCall("jwt"), authorization("user"), (req, res) => {
-  console.log(req.cookies); 
+  req.logger.info(req.cookies); 
   userController.currentUser(req, res);
 });
 

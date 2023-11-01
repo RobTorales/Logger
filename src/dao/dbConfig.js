@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { MONGODB_CNX_STR } from "../config/configs.js";
+import { MONGODB_CNX_STR } from "../config/config.js";
 
 const URI = MONGODB_CNX_STR
 

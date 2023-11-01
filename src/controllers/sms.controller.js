@@ -1,7 +1,7 @@
 import twilio from "twilio";
-import { TWILIO_NUMBER, TWILIO_AUTH_TOKEN, TWILIO_SID } from "../config/configs.js";
+import { TWILIO_NUMBER, TWILIO_AUTH_TOKEN, TWILIO_ACCOUNT_SID} from "../config/config.js";
 
-const twilioClient = twilio(TWILIO_SID, TWILIO_AUTH_TOKEN);
+const twilioClient = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 const twilioSMSOptions = {
     body: "Esto es un mensaje SMS de prueba usando Twilio desde Coderhouse.",
     from: TWILIO_NUMBER,

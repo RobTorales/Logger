@@ -1,5 +1,5 @@
 import winston from "winston";
-import configs from "./configs.js";
+import configs from "./config.js";
 
 
 
