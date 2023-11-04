@@ -16,8 +16,8 @@ const environment = program.opts().mode;
 dotenv.config({
        path:
          environment === "production"
-           ? "./src/config/.env.production"
-           : "./src/config/.env.development",
+           ? "./config/.env.production"
+           : "./config/.env.development",
      });
 
 export const PORT = 8080;
@@ -31,7 +31,7 @@ export const SECRET_SESSIONS = process.env.SECRET_SESSIONS
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 export const PERSISTENCE = process.env.PERSISTENCE;
 export const GMAIL_USER = process.env.EMAIL_USER;
-export const GMAIL_PASSWORD = process.env.GMAIL_PASWORD;
+export const GMAIL_PASS = process.env.GMAIL_PASS;
 export const TWILIO_NUMBER = process.env.TWILIO_NUMBER;
 export const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
 export const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;

@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { GMAIL_PASSWORD, GMAIL_USER } from "../config/config.js";
+import { GMAIL_PASS, GMAIL_USER } from "../config/config.js";
 import __dirname from "../utils.js";
 
 const transporter = nodemailer.createTransport({
@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
   port: 587,
   auth: {
     user: GMAIL_USER,
-    pass: GMAIL_PASSWORD,
+    pass: GMAIL_PASS,
   },
   tls: {
     rejectUnauthorized: false
@@ -37,15 +37,9 @@ const mailOptionsWithAttachments = {
   html: `<div>
               <h1>Esto es un Test de envio de correos con Nodemailer!</h1>
               <p>Ahora usando imagenes: </p>
-              <img src="cid:okunaLogo"/>
+              <img src="cid:BurgerFactory"/>
           </div>`,
-  attachments: [
-    {
-      filename: "Okuna",
-      path: __dirname+'/src/public/images/okunaLogo.png',
-      cid: "okunaLogo",
-    },
-  ],
+  attachments: [ ],
 };
 
 export const sendEmail = (req, res) => {

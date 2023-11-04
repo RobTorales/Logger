@@ -22,6 +22,7 @@ import cookieParser from "cookie-parser";
 import initializeGitHubPassport from "./github/ingreso.github.js";
 import passport from "passport";
 import cors from "cors";
+import morgan from "morgan";
 import initializePassport from "./config/passport.config.js";
 import "./dao/dbConfig.js";
 import { addLogger, devLogger } from "./config/logger.js";
