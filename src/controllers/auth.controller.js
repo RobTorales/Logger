@@ -9,24 +9,14 @@ class AuthController {
         this.CartServices = new CartServices();
     }
 
-    loginUser = async (req, res, next) => {
+    loginUser = async (req, res) => {
         const { email, password } = req.body;
         let user = await this.AuthServices.LoginUser(email, password);
-        req.logger.info("User data retrieved:", userData);
-
         if (!user) {
-            req.logger.error("Invalid credentials");
-            const customeError = new CustomeError({
-                name: "Auth Error",
-                message: "Credenciales invalidas",
-                code:401,
-                cause: authError(email),
-            });
-            return next(customeError)
+            return res.status(401).send({ status: "error", message: "Error! El usuario no existe!" });
         }
         const userData = { token: Math.random().toString(36).substring(7) }; 
         res.cookie("robCookieToken", userData.token, { maxAge: 3600 * 1000, httpOnly: true });
-        this.CartServices.newCart();    
         return res.status(200).json({ status: "success", user: userData.user, redirect: "/products" });
     }
 

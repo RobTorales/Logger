@@ -4,14 +4,10 @@ import __dirname from "../utils.js";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
-  port: 587,
   auth: {
     user: GMAIL_USER,
     pass: GMAIL_PASS,
   },
-  tls: {
-    rejectUnauthorized: false
-  }
 });
 
 transporter.verify(function (error, success) {

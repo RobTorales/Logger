@@ -11,12 +11,14 @@ class CartController {
     }
 
     newCart = async (req, res) => {
-        const cart = await this.cartServices.newCart();
-    
-        if (cart) {
-            res.send({status:"ok", message:"El Carrito se creó correctamente!", id:cart._id});
-        } else {
-            res.status(500).send({status:"error", message:"Error! No se pudo crear el Carrito!"});
+        try {
+            const cart = await this.cartServices.newCart();
+            res.send(cart);
+        } catch (error) {
+            res.status(500).send({
+                status: "error",
+                message: error.message,
+              });
         }
     }
 
