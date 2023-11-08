@@ -1,12 +1,13 @@
 import nodemailer from "nodemailer";
-import { GMAIL_PASS, GMAIL_USER } from "../config/config.js";
+import config from "../config/config.js";
 import __dirname from "../utils.js";
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
+  port: 587,
   auth: {
-    user: GMAIL_USER,
-    pass: GMAIL_PASS,
+    user: config.GMAIL_USER,
+    pass: config.GMAIL_PASS,
   },
 });
 
@@ -54,7 +55,7 @@ export const sendEmail = (req, res) => {
       .status(500)
       .send({
         error: error,
-        message: "No se pudo enviar el email desde:" + config.gmailAccount,
+        message: "No se pudo enviar el email desde:" + config.GMAIL_USER,
       });
   }
 };
@@ -78,7 +79,7 @@ export const sendEmailWithAttachments = (req, res) => {
       .status(500)
       .send({
         error: error,
-        message: "No se pudo enviar el email desde:" + config.gmailAccount,
+        message: "No se pudo enviar el email desde:" + config.GMAIL_USER,
       });
   }
 };

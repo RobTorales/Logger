@@ -3,6 +3,7 @@ import CartServices from "../services/cart.services.js";
 import TicketController from "./ticket.controller.js";
 import UserDTO from "../dao/dtos/user.dto.js";
 import { ticketModel } from "../dao/models/ticket.model.js";
+import ticketController from "./ticket.controller.js";
 
 
 class CartController {
@@ -11,14 +12,12 @@ class CartController {
     }
 
     newCart = async (req, res) => {
-        try {
-            const cart = await this.cartServices.newCart();
-            res.send(cart);
-        } catch (error) {
-            res.status(500).send({
-                status: "error",
-                message: error.message,
-              });
+        const cart = await this.cartServices.newCart();
+    
+        if (cart) {
+            res.send({status:"ok", message:"El Carrito se creó correctamente!", id:cart._id});
+        } else {
+            res.status(500).send({status:"error", message:"Error! No se pudo crear el Carrito!"});
         }
     }
 
@@ -251,5 +250,7 @@ class CartController {
       }
     
 }
+
+    
 
 export default CartController;

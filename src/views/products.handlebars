@@ -29,6 +29,9 @@
                     
                 </ul>
         </div>
+        <div class="user">
+            <p class="text-white">Bienvenido, {{user.role}}:{{user.first_name}} {{user.last_name}}!</p>
+        </div>
         {{#each products.payload}}
             <div class="col-md-4 bg-white pt-2 pb-2 shadow p-3 mb-5 bg-body-tertiary">
                 <div class="card border-0 mb-4">

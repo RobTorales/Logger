@@ -2,6 +2,18 @@ import express from "express";
 import ProductManager from "../dao/ProductManager.js";
 import CartManager from "../dao/CartManager.js";
 
+const checkSession = (req, res, next) => {
+    console.log('Checking session:', req.session);
+  
+    if (req.session && req.session.user) {
+      console.log('Session exists:', req.session.user);
+      next();
+    } else {
+      console.log('No session found, redirecting to /login');
+      res.redirect("/login");
+    }
+  };
+
 const router = express.Router();
 const PM = new ProductManager();
 const CM = new CartManager();
@@ -48,6 +60,15 @@ router.get("/chat", (req, res) => {
 router.get("/login", async (req, res) => {
     res.render("login");
 });
+
+router.get("/profile", checkSession, (req, res) => {
+    console.log('Inside /profile route');
+  
+    const userData = req.session.user;
+    console.log('User data:', userData);
+  
+    res.render("profile", { user: userData });
+  });
 
 router.get("/register", async (req, res) => {
     res.render("register");
