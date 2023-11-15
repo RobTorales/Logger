@@ -1,6 +1,27 @@
 * {
+<<<<<<< HEAD
   margin: 0;
   padding: 0;
+=======
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+.fondo{
+  background-image: url(https://images.unsplash.com/photo-1595757816291-ab4c1cba0fc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px, auto, 100px;
+    grid-template-areas: 
+    "header"
+    "footer"
+    ;
+>>>>>>> e220402e43f08c021df8af284c35a02549459871
 }
 
 
@@ -95,6 +116,7 @@ width: 145px;
 }
 
 .boton-github{
+<<<<<<< HEAD
 text-decoration: none;
 color: white;
 }
@@ -322,3 +344,77 @@ footer{
   color: #6A6D78;
   font-size: 1.31rem;
 }
+=======
+  text-decoration: none;
+  color: white;
+}
+
+.login{
+  width: 450px;
+  height: 750px;
+  position: relative;
+  padding: 10px 30px;
+}
+
+.home{
+  display: flex;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 75%;
+  height: 75%;
+  margin-top: 6px;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  padding: 100px 0;
+  color: white;
+}
+
+.content h2{
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+.content h3{
+  font-size: 1.5rem;
+  text-align: center;
+}
+.content p{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.content .icon{
+  margin-top: 20px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.content .icon i{
+  margin-left: 20px;
+}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem;
+    background-color: white;
+}
+
+.tarjetas{
+  height: auto;
+  width: auto;
+  max-width: 70px;
+  max-height: 30px;
+}
+
+.icono{
+  font-size: 30px;
+}
+>>>>>>> e220402e43f08c021df8af284c35a02549459871

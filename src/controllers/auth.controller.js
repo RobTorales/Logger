@@ -11,6 +11,7 @@ class AuthController {
         this.CartServices = new CartServices();
     }
 
+<<<<<<< HEAD
     async loginUser(req, res, next) {
       try {
        const { email, password } = req.body;
@@ -67,6 +68,24 @@ class AuthController {
         }
         return res.redirect("/login");
       });
+=======
+    loginUser = async (req, res) => {
+        const { email, password } = req.body;
+        let user = await this.AuthServices.LoginUser(email, password);
+        if (!userData || !userData.user) {
+            req.logger.error("Invalid credentials");
+            const customeError = new CustomeError({
+              name: "Auth Error",
+              message: "Credenciales invalidas",
+              code:401,
+              cause: authError(email),
+            });
+            return next(customeError)
+          }
+        const userData = { token: Math.random().toString(36).substring(7) }; 
+        res.cookie("robCookieToken", userData.token, { maxAge: 3600 * 1000, httpOnly: true });
+        return res.status(200).json({ status: "success", user: userData.user, redirect: "/products" });
+>>>>>>> e220402e43f08c021df8af284c35a02549459871
     }
 
     async githubCallback (req, res)  {

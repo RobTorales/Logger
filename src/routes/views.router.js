@@ -25,6 +25,18 @@ const checkSession = (req, res, next) => {
     }
   };
 
+const checkSession = (req, res, next) => {
+    console.log('Checking session:', req.session);
+  
+    if (req.session && req.session.user) {
+      console.log('Session exists:', req.session.user);
+      next();
+    } else {
+      console.log('No session found, redirecting to /login');
+      res.redirect("/login");
+    }
+  };
+
 const router = express.Router();
 const PM = new ProductManager();
 const CM = new CartManager();
@@ -91,10 +103,20 @@ router.get("/login", async (req, res) => {
 });
 
 router.get("/profile", checkSession, (req, res) => {
+<<<<<<< HEAD
   const userData = req.session.user;
   console.log('User data:', userData);
   res.render("profile", { user: userData });
 });
+=======
+    console.log('Inside /profile route');
+  
+    const userData = req.session.user;
+    console.log('User data:', userData);
+  
+    res.render("profile", { user: userData });
+  });
+>>>>>>> e220402e43f08c021df8af284c35a02549459871
 
 router.get("/register", async (req, res) => {
     res.render("register");

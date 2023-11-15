@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body class="fondo">
+<<<<<<< HEAD
     <div class="contenedor-nav bg-white mb-5">
             <nav class="navbar navbar-expand-lg bg-body-tertiary bg-white">
                     <a class="navbar-brand" href="/"><img src="/images/Burger Factory.png" alt="Burger Factory" width="120"></a>
@@ -75,6 +76,47 @@
         </div>
         
     </footer> 
+=======
+    <div class=" bg-white mb-5">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a href="/" title="Burger Factory"><img src="images/burger factory.png" alt="Burger Factory" width="120"></a>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/realtimeproducts">Real Time Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/chat">Chat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/profile">Tu perfil</a>
+                        </li>
+                        {{#if session.session.loggedIn}}
+                            <a class="nav-link text-dark" href="/logout">Logout</a>
+                        {{/if}}
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-danger" type="submit"><i class="bi bi-search"></i></button>
+                        <a class="icono text-danger" href="/login"><i class="bi bi-person-fill"></i></a>
+                        <a class="icono text-danger" href="/cart"><i id="cartButton"class="bi bi-cart-fill "></i></a>
+                    </form>
+                    </div>
+                </div>
+            </nav>
+           
+        </div>
+    </div>
+    {{{body}}}
+>>>>>>> e220402e43f08c021df8af284c35a02549459871
 
 
     
