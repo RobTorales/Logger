@@ -1,5 +1,24 @@
 <div class="container">
-    <div class="row">
-        <h1>Perfil</h1>
-    </div>
+      <div class="bg-white rounded p-1 mb-5">
+            <div class="col-md-4 offset-md-4">
+        <div class="user-data">
+          <h1 class="text-dark" >Bienvenido, {{user.full_name}} {{user.first_name}}</h1>
+          <p class="text-dark">Tu correo electrónico es: {{user.email}}</p>
+          <p class="text-dark">Tu rol es: {{user.role}}</p>
+          
+        </div>
+        <div class="mb-3">
+        <div class="color1" >
+            
+            <button class=" boton"><a href="/restore"></a><p class="p">Cambiar clave</p></a></button>
+            
+            </div>
+                </div>
+                <form action="/api/sessions/logout" method="POST" class="col-md-4 offset-md-4">
+                    <button type="submit" class=" boton"><p class="p">Cerrar sesion</p></button>
+                </form>
+                </div>
+            </div>
+        </div>
+        
 </div>

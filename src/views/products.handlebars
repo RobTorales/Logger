@@ -1,6 +1,7 @@
+
+
 <div class="container">
     <div class="row rounded">
-        <div>
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link active text-dark " aria-current="page" href="#">Todos</a>
@@ -25,24 +26,26 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white  " href="#"><p class="p">Alcohol</p></a>
-                    </li>
-                    
+                    </li>   
                 </ul>
-        </div>
+     
         {{#each products.payload}}
-            <div class="col-md-4 bg-white pt-2 pb-2 shadow p-3 mb-5 bg-body-tertiary">
-                <div class="card border-0 mb-4">
-                    
-                    <div class="card-body text-center ">
-                        <a href="/products/{{this._id}}" class="text-decoration-none">
-                            <img src="{{this.thumbnails}}" class="img-fluid" alt="{{this.title}}">
-                        </a>
-                        <div>{{this.title}}</div>
-                        <p>${{this.price}}</p>
-                        <p><button class="boton" onclick="agregarProductoAlCarrito('{{product._id}}')"><p class="p">Agregar </p></button></p>
+        
+    <div class="col-md-4  pt-3 pb-2  p-3 mb-2 rounded">
+            <div class="col">
+                <div class="card text-center">
+                    <a href="/products/{{this._id}}" class="text-decoration-none">
+                        <img src="{{this.thumbnails}}" class="img-fluid" alt="{{this.title}}">
+                    </a>
+                    <div class="card-body">
+                        <h5>{{this.title}}</h5>
+                            <p>${{this.price}}</p>
+                            <p><button class="boton" onclick="agregarProductoAlCarrito('{{product._id}}')"><p class="p">Agregar </p></button></p>
                     </div>
                 </div>
             </div>
+    </div>
+            
         {{/each}}
     </div>
     <div class="row my-5">
@@ -79,4 +82,3 @@
 </div>
 
 <script src="js/cart.js"></script>
-<script src="js/products.js"></script>

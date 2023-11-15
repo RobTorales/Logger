@@ -118,4 +118,6 @@ const cookieExtractor = (req) => {
     return token;
 }
 
+
+
 export default initializePassport;

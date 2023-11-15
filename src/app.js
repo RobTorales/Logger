@@ -48,10 +48,10 @@ app.engine('handlebars', expressHandlebars.engine({
 }));
 app.use(session({
     store: new MongoStore({
-        mongoUrl: "mongodb+srv://roberto1608torales:roberto1608@cluster0.ggriuqe.mongodb.net/ecommerce?retryWrites=true&w=majority",
+        mongoUrl: MONGODB_CNX_STR,
         collectionName:"sessions"
     }),
-    secret: "S3CR3T0",
+    secret: SECRET_SESSIONS,
     resave: false,
     saveUninitialized: false,
     cookie: {secure:false}

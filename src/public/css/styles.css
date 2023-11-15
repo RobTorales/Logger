@@ -1,76 +1,324 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  
-.fondo{
-  background-image: url(https://images.unsplash.com/photo-1595757816291-ab4c1cba0fc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80);
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  margin: 0;
+  padding: 0;
 }
 
-.p{
-  color: white ;
-  z-index: 1;
+
+.fondo{
+background-image: url(https://images.unsplash.com/photo-1595757816291-ab4c1cba0fc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80);
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+min-height: 100vh;
+display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 150px, auto, 100px;
+  grid-template-areas: 
+  "header"
+  "footer"
+  ;
+}
+
+.contenedor-nav{
   display: flex;
-  align-items: center;
+  background-color: white;
+}
+
+.navbar{
+  margin: auto;
+  width: 50%;
+  background-color: WHITE;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.p{
+color: white ;
+z-index: 1;
+display: flex;
+align-items: center;
 }
 
 .boton{
-  border: 0.5px solid orange;
-  background-color: #F33117;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  overflow: hidden;
-  height: 55px;
-  width: 150px;
-  position: relative;
-  left: 100px;
+border: 0.5px solid orange;
+background-color: #F33117;
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+overflow: hidden;
+height: 55px;
+width: 150px;
+position: relative;
+left: 100px;
 }
 
 .boton:hover{
-  border:none;
-  box-shadow: none;
+border:none;
+box-shadow: none;
 }
 
 .boton::before{
-  content:"";
-  position: absolute;
-  height: 180px;
-  width: 180px;
-  background-image: conic-gradient(orange 20deg, transparent 120deg);
-  border-radius: 50%;
-  animation: Animate 1s linear infinite;
+content:"";
+position: absolute;
+height: 180px;
+width: 180px;
+background-image: conic-gradient(orange 20deg, transparent 120deg);
+border-radius: 50%;
+animation: Animate 1s linear infinite;
 }
 
 @keyframes Animate{
-  from{
-    transform: rotate(0deg);
-  }
-  to{
-    transform:  rotate(-360deg);
-  }
+from{
+  transform: rotate(0deg);
+}
+to{
+  transform:  rotate(-360deg);
+}
 }
 
 .boton::after{
-  content:"";
-  position:absolute;
-  height:55px;
-  width:150px;
-  background-color: #F33117;
+content:"";
+position:absolute;
+height:55px;
+width:150px;
+background-color: #F33117;
 }
 
 .boton:hover:after{
-  height: 50px;
-  width: 145px;
+height: 50px;
+width: 145px;
 }
 
 .boton-github{
-  text-decoration: none;
-  color: white;
+text-decoration: none;
+color: white;
+}
+
+.container-login{
+  display: flex;
+  flex-direction: column;
+}
+
+.div-login{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.login{
+  width: 450px;
+  height: 770px;
+  padding: 10px 30px;
+  background-color: white;
+}
+
+.container-home{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+
+.content{
+display: flex;
+flex-direction: column;
+width: 600px;
+padding: 100px 0;
+color: white;
+}
+
+.content h2{
+font-size: 3.5rem;
+text-align: center;
+}
+
+.content h3{
+font-size: 1.5rem;
+text-align: center;
+}
+.content p{
+margin-top: 20px;
+text-align: center;
+font-size: 1rem;
+}
+
+.content .icon{
+margin-top: 20px;
+font-size: 1.5rem;
+display: flex;
+justify-content: center;
+}
+
+.content .icon i{
+margin-left: 20px;
+}
+
+.footer{
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+  background-color: white;
+}
+
+.tarjetas{
+height: auto;
+width: auto;
+max-width: 70px;
+max-height: 30px;
+}
+
+.icono{
+font-size: 30px;
+}
+
+.logo-login{
+display: flex;
+justify-content: center;
+}
+
+footer{
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+}
+
+.tarjetas{
+  height: auto;
+  width: auto;
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.envio{
+  height: auto;
+  width: auto;
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.container-anuncios{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+}
+
+.anuncio{
+  display: flex;
+  justify-content: space-between;
+}
+
+.anuncio-1{
+  height: 300px;
+}
+
+.anuncio-2{
+  height: 300px;
+}
+.anuncio-3{
+  height: 300px;
+}
+
+.container-iframe{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.contenedor-carousel{
+  display: flex;
+  padding: 0 35px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 1500px;
+  position: relative;
+}
+.wrapper i {
+  top: 50%;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  position: absolute;
+  color: red;
+  background-color: white;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.1s linear;
+}
+.wrapper i:active{
+  transform: translateY(-50%) scale(0.85);
+}
+.wrapper i:first-child{
+  left: -22px;
+}
+.wrapper i:last-child{
+  right: -22px;
+}
+.wrapper .carousel{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% / 3) - 12px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 16px;
+  border-radius: 8px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+.carousel.no-transition {
+  scroll-behavior: auto;
+}
+.carousel.dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+.carousel.dragging .card {
+  cursor: grab;
+  user-select: none;
+}
+.carousel :where(.card, .img) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel .card {
+  scroll-snap-align: start;
+  height: 342px;
+  list-style: none;
+  background: #fff;
+  padding-bottom: 15px;
+  flex-direction: column;
+  border-radius: 8px;
+}
+.carousel .card .img {
+  background: #8B53FF;
+  height: 342px;
+  width: 248px;
+  border-radius: 10px;
+}
+.card .img img {
+  width: 140px;
+  height: 140px;
+  border-radius: 2px;
+  object-fit: cover;
+  border: 4px solid #fff;
+}
+
+.carousel .card span {
+  color: #6A6D78;
+  font-size: 1.31rem;
 }

@@ -3,6 +3,7 @@ import CartServices from "../services/cart.services.js";
 import TicketController from "./ticket.controller.js";
 import UserDTO from "../dao/dtos/user.dto.js";
 import { ticketModel } from "../dao/models/ticket.model.js";
+import ticketController from "./ticket.controller.js";
 
 
 class CartController {
@@ -249,5 +250,7 @@ class CartController {
       }
     
 }
+
+    
 
 export default CartController;

@@ -28,7 +28,13 @@ router.get(
     authController.githubCallback(req, res);
   }
 );
+
+router.post("/reset-password/:token", async (req, res) =>
+  authController.resetPassword(req, res)
+);
+
 router.post("/logout", (req, res) => authController.logout(req, res));
+
 router.get("/current", passportCall("jwt"), authorization("user"), (req, res) => {
   req.logger.info(req.cookies); 
   userController.currentUser(req, res);

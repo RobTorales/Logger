@@ -30,11 +30,13 @@ export const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 export const SECRET_SESSIONS = process.env.SECRET_SESSIONS
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 export const PERSISTENCE = process.env.PERSISTENCE;
-export const GMAIL_USER = process.env.EMAIL_USER;
+export const GMAIL_USER = process.env.GMAIL_USER;
 export const GMAIL_PASS = process.env.GMAIL_PASS;
 export const TWILIO_NUMBER = process.env.TWILIO_NUMBER;
 export const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
 export const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+export const PREMIUM_EMAIL = process.env.PREMIUM_EMAIL;
+export const PREMIUM_PASSWORD = process.env.PREMIUM_PASSWORD;
 
 export default{
        environment: environment
